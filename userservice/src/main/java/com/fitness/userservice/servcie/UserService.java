@@ -10,9 +10,10 @@ import com.fitness.userservice.dto.UserResponse;
 import com.fitness.userservice.model.User;
 import com.fitness.userservice.repository.UserRespository;
 
-import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -55,6 +56,11 @@ public class UserService {
         userResponse.setCreatedAt(user.getCreatedAt());
         userResponse.setUpdatedAt(user.getUpdatedAt());
         return userResponse;
+    }
+
+    public Boolean existByUserId(UUID userId) {
+        log.info("Validating user with id: {}", userId);
+        return Respository.existsById(userId);
     }
     
 }
